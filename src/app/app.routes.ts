@@ -9,6 +9,7 @@ import { ManageUserRoleComponent } from './components/admin/manage-user-role/man
 import { TaskDetailsComponent } from './components/member/task-details/task-details.component';
 import { MemberComponent } from './components/member/member.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { EditDetailsComponent } from './shared/edit-details/edit-details.component';
 
 
 
@@ -52,6 +53,12 @@ export const routes: Routes = [
       {
         path: 'view/:id',
         loadComponent: () => import('./shared/view-tasks/view-tasks.component').then(m => m.ViewTaskComponent),
+        canActivate: [AuthGuard],
+        data: { roles: ['reporter','admin'] }
+      },
+      {
+        path: 'edituser/:id',
+        loadComponent: () => import('./shared/edit-details/edit-details.component').then(m => m.EditDetailsComponent),
         canActivate: [AuthGuard],
         data: { roles: ['reporter','admin'] }
       },

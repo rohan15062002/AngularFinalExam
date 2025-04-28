@@ -82,9 +82,17 @@ export class AdminComponent {
     }
   }
   
+  getAssignedUserName(userId: string): string {
+    const user = this.usersService.getUserById(userId);  
+    return user ? user.name : 'Unknown User';
+  }
 
    editTask(id:string){
     return this.router.navigateByUrl(`admin/edit/${id}`)
+   }
+
+   viewTask(id:string){
+    return this.router.navigateByUrl(`view/${id}`)
    }
 }
 

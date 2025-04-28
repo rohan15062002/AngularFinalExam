@@ -79,7 +79,36 @@
             Task should be assigned to a member.
           </div>
         </div>
-      
+        
+          <!-- Status -->
+      <div class="form-group">
+        <label for="status">Status </label>
+        <select
+          id="status"
+          type="text"
+          formControlName="status"
+          placeholder="Select status"
+          class="students-select"
+          [class.invalid]="
+          editTaskForm.get('status')?.invalid &&
+          editTaskForm.get('status')?.touched
+          "
+        >
+        <option *ngFor="let status of statues" [value]="status">
+          {{ status | titlecase }}
+        </option>
+        </select>
+        <div
+          class="error"
+          *ngIf="
+          editTaskForm.get('status')?.hasError('required') &&
+          editTaskForm.get('status')?.touched
+          "
+        >
+          Project must have a status
+        </div>
+      </div>
+
         <!-- Comment -->
         <div class="form-group">
           <label for="comment">Comment (optional)</label>

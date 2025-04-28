@@ -18,10 +18,11 @@
       <div class="exam-card-content">
         <h3>{{ task.title | titlecase }}</h3>
         <p><strong>Status:</strong> {{task.status | titlecase}}</p>
-        <p><strong>Assigned To:</strong> {{task.assignedTo}}</p>
+        <p><strong>Assigned To:</strong> {{ getAssignedUserName(task.assignedTo) }}</p>
       </div>
 
         <div class="actions">
+            <button class="orders-button" (click)="viewTask(task.id)">View</button>
             <button class="action-button" (click)="editTask(task.id)">Edit</button>
             <button class="delete-btn" (click)="deleteTask(task)">Delete</button> 
         </div>

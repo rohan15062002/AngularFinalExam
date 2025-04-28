@@ -131,6 +131,22 @@ export class AuthService {
     }
   }
 
+  async updateUser(updatedUserData: CurrentUser) {
+    const uid = this.currentUser?.uid;
+    console.log(updatedUserData,"updated")
+    const userRef = collection(this.firestore, `users`);
+    const q = query(userRef, where('email', '==', this.currentUser?.email));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      throw new Error('User not found with this email');
+    }
+
+    const userDoc = querySnapshot.docs[0]; // assuming email is unique
+    console.log(userDoc.id)
+    const userDocRef = doc(this.firestore, 'users', userDoc.id);
+    await setDoc(userDocRef, { ...updatedUserData,uid: uid});
+  }
+
   getLoggedInUser(): User | null {
     return this.auth.currentUser;
   }

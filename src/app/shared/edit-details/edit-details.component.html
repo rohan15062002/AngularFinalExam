@@ -30,7 +30,8 @@
         <div class="error" *ngIf="editForm.get('email')?.hasError('required') && editForm.get('email')?.touched">
           Email is required.
         </div>
-  
+        
+        <div *ngIf="role === 'admin'">
         <label for="role">Role</label>
         <select
           id="role"
@@ -45,6 +46,7 @@
         </select>
         <div class="error" *ngIf="editForm.get('role')?.hasError('required') && editForm.get('role')?.touched">
           Role is required.
+        </div>
         </div>
   
         <button type="submit">Update User</button>

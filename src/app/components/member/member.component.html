@@ -14,11 +14,11 @@
       <div class="exam-card-content">
         <h3>{{ task.title | titlecase }}</h3>
         <p><strong>Status:</strong> {{task.status | titlecase}}</p>
-        <p><strong>Assigned To:</strong> {{task.assignedTo}}</p>
+        <p><strong>Assigned To:</strong> {{ getAssignedUserName(task.assignedTo) }}</p>
       </div>
 
         <div class="actions">
-            <button class="action-button" (click)="updateTask(task.id)">Update</button>
+            <button class="action-button" (click)="updateTask(task.id)" *ngIf="task.status!=='completed'">Update</button>
             <button class="orders-button" (click)="viewTask(task.id)">View</button> 
         </div>
     </div>

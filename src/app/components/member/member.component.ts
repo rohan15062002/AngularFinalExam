@@ -52,7 +52,11 @@ export class MemberComponent  {
   get tasks() {
     return this.taskService.getTasks();
   }
-
+  
+  getAssignedUserName(userId: string): string {
+    const user = this.usersService.getUserById(userId);  // you need to write this function in UsersService
+    return user ? user.name : 'Unknown User';
+  }
 
    viewTask(id:string){
     return this.router.navigateByUrl(`view/${id}`)

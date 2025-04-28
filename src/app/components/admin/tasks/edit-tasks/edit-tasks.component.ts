@@ -21,6 +21,7 @@ export class EditTasksComponent {
   id: string;
   editTaskForm!: FormGroup;
   taskDetails!: Task;
+  statues = ['pending', 'in-progress', 'completed'];
 
   constructor(
     private userService: UsersService,
@@ -49,6 +50,9 @@ export class EditTasksComponent {
           validators: [Validators.required],
         }),
         assignedTo: new FormControl(this.taskDetails?.assignedTo, {
+          validators: [Validators.required],
+        }),
+        status: new FormControl(this.taskDetails?.status, {
           validators: [Validators.required],
         }),
         comment: new FormControl(''),
@@ -95,9 +99,10 @@ export class EditTasksComponent {
       title: this.editTaskForm.value.taskName!,
       projectDescription: this.editTaskForm.value.projectDescription!,
       assignedTo: this.editTaskForm.value.assignedTo!,
-      status: this.taskDetails?.status!,
+      status: this.editTaskForm.value.status!,
       comments: this.taskDetails?.comments ?? [],
     };
+   
     this.isLoading = true;
 
     this.taskService
