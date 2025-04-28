@@ -3,7 +3,7 @@
   
   <div class="task-content" *ngIf="!loading; else loadingTemplate">
     <div class="task-header">
-      <h1>{{ task.title }}</h1>
+      <h1>{{ task.title | titlecase }}</h1>
       <span class="task-status" [ngClass]="{
         'pending': task.status === 'pending',
         'in-progress': task.status === 'in-progress',
@@ -21,7 +21,7 @@
 
       <div class="detail-row">
         <h3>Assigned To</h3>
-        <p>{{ task.assignedTo }}</p>
+        <p>{{ getAssignedUserName(task.assignedTo)| titlecase}}</p>
       </div>
     </div>
 

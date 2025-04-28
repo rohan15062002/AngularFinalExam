@@ -53,6 +53,11 @@ export class ViewTaskComponent {
     
   }
   
+  getAssignedUserName(userId: string): string {
+    const user = this.userService.getUserById(userId);  // you need to write this function in UsersService
+    return user ? user.name : 'Unknown User';
+  }
+
   goHome(){
     return this.router.navigateByUrl(`dashboard/${this.role}`)
   }
