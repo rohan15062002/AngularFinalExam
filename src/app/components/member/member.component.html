@@ -1,27 +1,71 @@
-
 <app-navbar title="Member Dashboard"></app-navbar>
 <section class="manage-exams">
   <div class="dashboard-header">
     <h2>Manage Tasks</h2>
   </div>
-  @if(loading){
-  <p class="loading">Loading task...</p>
-  } @else { @if(tasks.length === 0){
-  <p class="no-exam">No task found.</p>
-  } @else{
-  <div class="exam-cards">
-    <div class="exam-card" *ngFor="let task of tasks">
-      <div class="exam-card-content">
-        <h3>{{ task.title | titlecase }}</h3>
-        <p><strong>Status:</strong> {{task.status | titlecase}}</p>
-        <p><strong>Assigned To:</strong> {{ getAssignedUserName(task.assignedTo) }}</p>
-      </div>
 
-        <div class="actions">
-            <button class="action-button" (click)="updateTask(task.id)" *ngIf="task.status!=='completed'">Update</button>
-            <button class="orders-button" (click)="viewTask(task.id)">View</button> 
+  @if (loading) {
+    <p class="loading">Loading tasks...</p>
+  } @else {
+
+    <!-- Pending Tasks -->
+    <h3>Pending Tasks</h3>
+    @if (pendingTasks.length === 0) {
+      <p class="no-exam">No pending tasks found.</p>
+    } @else {
+      <div class="exam-cards">
+        <div class="exam-card" *ngFor="let task of pendingTasks">
+          <div class="exam-card-content">
+            <h3>{{ task.title | titlecase }}</h3>
+            <p><strong>Status:</strong> {{ task.status | titlecase }}</p>
+            <p><strong>Assigned To:</strong> {{ getAssignedUserName(task.assignedTo) | titlecase}}</p>
+          </div>
+          <div class="actions">
+            <button class="action-button" (click)="updateTask(task.id)" *ngIf="task.status !== 'completed'">Update</button>
+            <button class="orders-button" (click)="viewTask(task.id)">View</button>
+          </div>
         </div>
-    </div>
-  </div>
-  } }
+      </div>
+    }
+
+    <!-- In Progress Tasks -->
+    <h3>In-Progress Tasks</h3>
+    @if (inProgressTasks.length === 0) {
+      <p class="no-exam">No in-progress tasks found.</p>
+    } @else {
+      <div class="exam-cards">
+        <div class="exam-card" *ngFor="let task of inProgressTasks">
+          <div class="exam-card-content">
+            <h3>{{ task.title | titlecase }}</h3>
+            <p><strong>Status:</strong> {{ task.status | titlecase }}</p>
+            <p><strong>Assigned To:</strong> {{ getAssignedUserName(task.assignedTo) | titlecase}}</p>
+          </div>
+          <div class="actions">
+            <button class="action-button" (click)="updateTask(task.id)" *ngIf="task.status !== 'completed'">Update</button>
+            <button class="orders-button" (click)="viewTask(task.id)">View</button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Completed Tasks -->
+    <h3>Completed Tasks</h3>
+    @if (completedTasks.length === 0) {
+      <p class="no-exam">No completed tasks found.</p>
+    } @else {
+      <div class="exam-cards">
+        <div class="exam-card" *ngFor="let task of completedTasks">
+          <div class="exam-card-content">
+            <h3>{{ task.title | titlecase }}</h3>
+            <p><strong>Status:</strong> {{ task.status | titlecase }}</p>
+            <p><strong>Assigned To:</strong> {{ getAssignedUserName(task.assignedTo)| titlecase}}</p>
+          </div>
+          <div class="actions">
+            <button class="orders-button" (click)="viewTask(task.id)">View</button>
+          </div>
+        </div>
+      </div>
+    }
+
+  }
 </section>

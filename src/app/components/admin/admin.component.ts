@@ -16,6 +16,10 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 export class AdminComponent {
   loading = false;
   users: User[] = [];
+  pendingTasks: Task[] = [];
+  inProgressTasks: Task[] = [];
+  completedTasks: Task[] = [];
+
   constructor(
     private router: Router,
     private usersService: UsersService,
@@ -38,6 +42,7 @@ export class AdminComponent {
       .then(
         (tasks) => {
           this.taskService.setTasks(tasks);
+          this.categorizeTasks(); 
         },
         (error) => {
           console.log('Error:', error);
@@ -50,6 +55,13 @@ export class AdminComponent {
 
   get tasks() {
     return this.taskService.getTasks();
+  }
+
+  categorizeTasks() {
+    const allTasks = this.taskService.getTasks();
+    this.pendingTasks = allTasks.filter(task => task.status.toLowerCase() === 'pending');
+    this.inProgressTasks = allTasks.filter(task => task.status.toLowerCase() === 'in-progress');
+    this.completedTasks = allTasks.filter(task => task.status.toLowerCase() === 'completed');
   }
 
   addTask(){
