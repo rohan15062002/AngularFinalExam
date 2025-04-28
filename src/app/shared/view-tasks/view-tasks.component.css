@@ -1,0 +1,132 @@
+.task-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.task-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.task-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.task-status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.task-status.pending {
+  background-color: #ffeb3b;
+  color: #ff6f00;
+}
+
+.task-status.in-progress {
+  background-color: #2196f3;
+  color: white;
+}
+
+.task-status.completed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.task-details {
+  margin-bottom: 30px;
+}
+
+.detail-row {
+  margin-bottom: 15px;
+}
+
+.detail-row h3 {
+  margin: 0 0 5px 0;
+  color: #555;
+  font-size: 16px;
+}
+
+.detail-row p {
+  margin: 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+.comments-section {
+  margin-top: 30px;
+}
+
+.comments-section h2 {
+  font-size: 20px;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.comment {
+  background-color: #f9f9f9;
+  border-left: 3px solid #2196f3;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 0 4px 4px 0;
+}
+
+.comment-text {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.comment-author {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+.no-comments {
+  color: #999;
+  font-style: italic;
+}
+
+.back-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #0d8bf2;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #666;
+}

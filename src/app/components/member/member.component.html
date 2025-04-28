@@ -1,0 +1,27 @@
+
+<app-navbar title="Member Dashboard"></app-navbar>
+<section class="manage-exams">
+  <div class="dashboard-header">
+    <h2>Manage Tasks</h2>
+  </div>
+  @if(loading){
+  <p class="loading">Loading task...</p>
+  } @else { @if(tasks.length === 0){
+  <p class="no-exam">No task found.</p>
+  } @else{
+  <div class="exam-cards">
+    <div class="exam-card" *ngFor="let task of tasks">
+      <div class="exam-card-content">
+        <h3>{{ task.title | titlecase }}</h3>
+        <p><strong>Status:</strong> {{task.status | titlecase}}</p>
+        <p><strong>Assigned To:</strong> {{task.assignedTo}}</p>
+      </div>
+
+        <div class="actions">
+            <button class="action-button" (click)="updateTask(task.id)">Update</button>
+            <button class="orders-button" (click)="viewTask(task.id)">View</button> 
+        </div>
+    </div>
+  </div>
+  } }
+</section>

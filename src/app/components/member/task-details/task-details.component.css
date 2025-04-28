@@ -1,0 +1,136 @@
+/* Main container styles */
+.heading-container {
+  margin-bottom: 1rem; /* Reduced margin */
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.heading {
+  font-size: 1.4rem; /* Reduced font size */
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 500px; /* Reduced container width */
+  margin: 0 auto;
+  padding: 1rem; /* Reduced padding */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
+/* Task details section */
+.task-info p {
+  margin: 0.8rem 0; /* Reduced margin */
+  font-size: 1rem; /* Reduced font size */
+  color: #34495e;
+}
+
+.task-info span {
+  font-weight: 500;
+  color: #2c3e50;
+  margin-left: 0.5rem;
+}
+
+/* Status form styles */
+form {
+  margin: 1rem 0; /* Reduced margin */
+}
+
+select {
+  padding: 0.5rem 0.8rem; /* Reduced padding */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Reduced font size */
+  width: 180px; /* Reduced width */
+  margin-right: 0.5rem;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem; /* Reduced padding */
+  font-size: 0.9rem; /* Reduced font size */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+button.disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Comments section */
+.comments-section {
+  margin-top: 1.5rem; /* Reduced margin */
+  padding-top: 1rem; /* Reduced padding */
+  border-top: 1px solid #eee;
+}
+
+.comments-section h3 {
+  font-size: 1.2rem; /* Reduced font size */
+  color: #2c3e50;
+  margin-bottom: 1rem; /* Reduced margin */
+}
+
+.comment {
+  background-color: #f8f9fa;
+  padding: 0.8rem; /* Reduced padding */
+  border-radius: 6px;
+  margin-bottom: 1rem; /* Reduced margin */
+}
+
+.comment p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.comment strong {
+  color: #2c3e50;
+}
+
+/* Comment form */
+textarea {
+  width: 100%;
+  padding: 0.7rem; /* Reduced padding */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.9rem; /* Reduced font size */
+  resize: vertical;
+  min-height: 60px; /* Reduced minimum height */
+  margin-bottom: 0.5rem;
+  box-sizing: border-box; /* Ensures padding does not exceed container width */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  select {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+  }
+
+  button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}

@@ -1,0 +1,49 @@
+<app-navbar title="Admin Dashboard"></app-navbar>
+
+<div class="access-management-container">
+  <div class="header-section">
+    <h2 class="management-title">Manage All User Access</h2>
+  </div>
+  
+  <section class="admin-section">
+    <h3 class="section-label">Administrators</h3>
+    <div *ngFor="let admin of admins" class="user-profile-card">
+      <div class="profile-details">
+        <div class="name-row">
+          <span class="user-name">{{ admin.name | titlecase }}</span>
+          <span *ngIf="admin.uid === currentUserId" class="current-user-badge">(You)</span>
+        </div>
+        <div class="email-row">
+          <span class="detail-label">Email:</span>
+          <span class="email-value">{{ admin.email }}</span>
+        </div>
+      </div>
+      <div class="action-buttons" *ngIf="admin.uid !== currentUserId">
+        <button class="remove-button" (click)="handleMakeUser(admin.uid)">
+          Revoke Admin
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <section class="member-section">
+    <h3 class="section-label">Members</h3>
+    <div *ngFor="let member of members" class="user-profile-card">
+      <div class="profile-details">
+        <div class="name-row">
+          <span class="detail-label">Name:</span>
+          <span class="user-name">{{ member.name | titlecase }}</span>
+        </div>
+        <div class="email-row">
+          <span class="detail-label">Email:</span>
+          <span class="email-value">{{ member.email }}</span>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="promote-button" (click)="handleMakeAdmin(member.uid)">
+          Grant Admin Privileges
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

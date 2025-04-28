@@ -1,0 +1,51 @@
+<app-navbar title="{{role}} Dashboard"></app-navbar>
+<div class="task-container">
+  
+  <div class="task-content" *ngIf="!loading; else loadingTemplate">
+    <div class="task-header">
+      <h1>{{ task.title }}</h1>
+      <span class="task-status" [ngClass]="{
+        'pending': task.status === 'pending',
+        'in-progress': task.status === 'in-progress',
+        'completed': task.status === 'completed'
+      }">
+        {{ task.status | titlecase }}
+      </span>
+    </div>
+
+    <div class="task-details">
+      <div class="detail-row">
+        <h3>Project Description</h3>
+        <p>{{ task.projectDescription }}</p>
+      </div>
+
+      <div class="detail-row">
+        <h3>Assigned To</h3>
+        <p>{{ task.assignedTo }}</p>
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <h2>Comments</h2>
+      <div *ngIf="task.comments && task.comments.length > 0; else noComments">
+        <div class="comment" *ngFor="let comment of task.comments">
+          <p class="comment-text">{{ comment.text }}</p>
+          <p class="comment-author">- {{ comment.author }}</p>
+        </div>
+      </div>
+      <ng-template #noComments>
+        <p class="no-comments">No comments yet.</p>
+      </ng-template>
+    </div>
+
+    <button class="back-button" (click)="goHome()">
+      Back to Dashboard
+    </button>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-spinner">
+      <p>Loading task details...</p>
+    </div>
+  </ng-template>
+</div>

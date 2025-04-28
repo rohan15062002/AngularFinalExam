@@ -1,0 +1,96 @@
+<app-navbar title="Admin Dashboard"></app-navbar>
+<div class="add-exam-container">
+    <h1>Edit Task</h1>
+    @if(isLoading){
+        <p class="loading">Loading tasks...</p>
+    }
+    @else{
+    <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+      <!-- Title -->
+    <div class="form-group">
+        <label for="name">Task Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="taskName"
+          placeholder="Enter Task Name"
+          [class.invalid]="
+            editTaskForm.get('taskName')?.invalid && editTaskForm.get('taskName')?.touched
+          "
+        />
+        <div
+          class="error"
+          *ngIf="
+            editTaskForm.get('taskName')?.hasError('required') &&
+            editTaskForm.get('taskName')?.touched
+          "
+        >
+          Task Name is required.
+        </div>
+      </div>
+  
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Task Descprition</label>
+        <textarea
+          id="description"
+          formControlName="projectDescription"
+          placeholder="Enter Task Description"
+          [class.invalid]="
+            editTaskForm.get('projectDescription')?.invalid && editTaskForm.get('projectDescription')?.touched
+          "></textarea>
+        <div
+          class="error"
+          *ngIf="
+            editTaskForm.get('projectDescription')?.hasError('required') &&
+            editTaskForm.get('projectDescription')?.touched
+          "
+        >
+        Task Description is required.
+        </div>
+      </div>
+       
+  
+       <!-- Assigned To -->
+       <div class="form-group">
+          <label for="assignedTo">Assign To </label>
+          <select
+            id="assignedTo"
+            type="text"
+            formControlName="assignedTo"
+            placeholder="Enter email addresses"
+            class="students-select"
+            [class.invalid]="
+            editTaskForm.get('assignedTo')?.invalid &&
+            editTaskForm.get('assignedTo')?.touched
+            "
+          >
+            @for(member of members; track member.uid ){
+            <option [value]="member.uid">{{ member.email }}</option>
+            }
+          </select>
+          <div
+            class="error"
+            *ngIf="
+            editTaskForm.get('assignedTo')?.hasError('required') &&
+            editTaskForm.get('assignedTo')?.touched
+            "
+          >
+            Task should be assigned to a member.
+          </div>
+        </div>
+      
+        <!-- Comment -->
+        <div class="form-group">
+          <label for="comment">Comment (optional)</label>
+          <textarea
+            id="comment"
+            formControlName="comment"
+            placeholder="Add a comment if any"
+            class="comment-box"
+          ></textarea>
+        </div>
+      <button type="submit">Edit Incident</button>
+    </form>
+    }
+  </div>

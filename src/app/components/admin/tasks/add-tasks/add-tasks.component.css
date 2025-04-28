@@ -1,0 +1,106 @@
+.add-exam-container {
+    max-width: 600px;
+    width: 90%; /* Added responsiveness */
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Inter", sans-serif;
+    color: #333;
+    box-sizing: border-box; /* Ensures padding doesn't push beyond width */
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #444;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  input,
+  textarea,
+  button,
+  .students-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box; /* Ensures proper sizing */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: "Inter", sans-serif;
+  }
+  
+  input:focus,
+  textarea:focus,
+  .students-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+  }
+  
+  button {
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  
+  button[disabled] {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .error {
+    color: #e63946;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .option-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .option-group input {
+    flex: 1;
+    min-width: 0; /* Prevents overflow in flex container */
+  }
+  
+  button[type="button"] {
+    width: auto;
+    background: transparent;
+    color: #007bff;
+    font-size: 14px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button[type="button"]:hover {
+    text-decoration: underline;
+  }

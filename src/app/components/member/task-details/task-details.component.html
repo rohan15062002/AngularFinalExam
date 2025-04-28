@@ -1,0 +1,79 @@
+<app-navbar title="Member Dashboard"></app-navbar>
+<div class="heading-container">
+    <p class="heading">Task Details</p>
+  </div>
+  
+  <div class="container">
+    <div *ngIf="isLoading; else taskDetailsTemplate">
+      <div class="loader"></div>
+    </div>
+  
+    <ng-template #taskDetailsTemplate>
+      <div>
+        <div>
+          <p>
+            Task Title:
+            <span>{{ taskDetails?.title }}</span>
+          </p>
+  
+          <div></div>
+          <div>
+            <p>
+              Project Name :
+              <span>{{ taskDetails?.projectDescription }}</span>
+            </p>
+            <p>
+              Assigned To:
+              <span>{{ userName }}</span>
+            </p>
+  
+            <p>
+              Task Status:
+              <span>{{ taskDetails?.status || taskStatusForm.get("status")?.value }}</span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <form [formGroup]="taskStatusForm" (ngSubmit)="onUpdateStatus()">
+            <select formControlName="status" style="font-size:medium">
+              <option value="pending">To-Do</option>
+              <option value="in-progress">In-Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+            <button
+              type="submit"
+              style="margin: 5px; font-size: small; padding: 13px;"
+              [class.disabled]="!taskStatusForm.dirty || isUpdating"
+            >
+              {{ isUpdating ? "Updating..." : "Update" }}
+            </button>
+          </form>
+        </div>
+  
+        <div class="comments-section">
+          <h3>Comments:</h3>
+          <div *ngFor="let comment of taskDetails?.comments">
+            <p><strong>{{ comment.author }}:</strong> {{ comment.text }}</p>
+          </div>
+          <form [formGroup]="commentForm" (ngSubmit)="onAddComment()">
+            <textarea
+              formControlName="text"
+              placeholder="Add a comment..."
+              rows="3"
+            ></textarea>
+            <div>
+              <button
+              type="submit"
+              [disabled]="!commentForm.valid"
+              style="margin-top: 10px;"
+              style="margin: 5px; font-size: small; padding: 13px;"
+              >
+              Add Comment
+            </button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  

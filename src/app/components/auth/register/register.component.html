@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="form-container" id="signup-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1>Sign Up</h1>
+        <form>
+          <label for="new-username" >Username</label>
+          <input type="text" id="new-username" name="new-username" required formControlName="username">
+          <label for="new-email">Email</label>
+          <input type="email" id="new-email" name="new-email" required formControlName="email">
+          <label for="new-password">Password</label>
+          <input type="password" id="new-password" name="new-password" required formControlName="password">
+          <label for="role">Role</label>
+            <select id="role" name="role"  required formControlName="role">
+                <option value="">Select role</option>
+                <option value="admin">Admin</option>
+                <option value="member">Member</option>
+            </select>
+          <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a  routerLink="/login" id="login-link">Login</a></p>
+      </div>
+</div>

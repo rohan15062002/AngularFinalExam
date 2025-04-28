@@ -1,0 +1,81 @@
+<app-navbar title="Admin Dashboard"></app-navbar>
+<div class="add-exam-container">
+  <h1>Add Incident</h1>
+  <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="name">Task Name</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="taskName"
+        placeholder="Enter Task Name"
+        [class.invalid]="
+          addTaskForm.get('taskName')?.invalid && addTaskForm.get('taskName')?.touched
+        "
+      />
+      <div
+        class="error"
+        *ngIf="
+          addTaskForm.get('taskName')?.hasError('required') &&
+          addTaskForm.get('taskName')?.touched
+        "
+      >
+        Task Name is required.
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Task Descprition</label>
+      <textarea
+        id="description"
+        formControlName="projectDescription"
+        placeholder="Enter Task Description"
+        [class.invalid]="
+          addTaskForm.get('projectDescription')?.invalid && addTaskForm.get('projectDescription')?.touched
+        "></textarea>
+      <div
+        class="error"
+        *ngIf="
+          addTaskForm.get('projectDescription')?.hasError('required') &&
+          addTaskForm.get('projectDescription')?.touched
+        "
+      >
+      Task Description is required.
+      </div>
+    </div>
+     
+
+     <!-- Assigned To -->
+     <div class="form-group">
+        <label for="assignedTo">Assign To </label>
+        <select
+          id="assignedTo"
+          type="text"
+          formControlName="assignedTo"
+          placeholder="Enter email addresses"
+          class="students-select"
+          [class.invalid]="
+          addTaskForm.get('assignedTo')?.invalid &&
+          addTaskForm.get('assignedTo')?.touched
+          "
+        >
+          @for(member of members; track member.uid ){
+          <option [value]="member.uid">{{ member.email }}</option>
+          }
+        </select>
+        <div
+          class="error"
+          *ngIf="
+          addTaskForm.get('assignedTo')?.hasError('required') &&
+          addTaskForm.get('assignedTo')?.touched
+          "
+        >
+          Task should be assigned to a member.
+        </div>
+      </div>
+
+    <button type="submit">Add Task</button>
+  </form>
+</div>

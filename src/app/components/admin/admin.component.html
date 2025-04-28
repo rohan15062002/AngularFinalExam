@@ -1,0 +1,31 @@
+
+<app-navbar title="Admin Dashboard"></app-navbar>
+<section class="manage-exams">
+  <div class="dashboard-header">
+    <h2>Manage Tasks</h2>
+    <div class="dashboard-btns">
+      <button class="add-exam-button" (click)="addTask()">Add Task</button>
+      <button class="orders-button" (click)="manageUsers()">Manage Users</button>
+    </div>
+  </div>
+  @if(loading){
+  <p class="loading">Loading task...</p>
+  } @else { @if(tasks.length === 0){
+  <p class="no-exam">No task found. Please add some task.</p>
+  } @else{
+  <div class="exam-cards">
+    <div class="exam-card" *ngFor="let task of tasks">
+      <div class="exam-card-content">
+        <h3>{{ task.title | titlecase }}</h3>
+        <p><strong>Status:</strong> {{task.status | titlecase}}</p>
+        <p><strong>Assigned To:</strong> {{task.assignedTo}}</p>
+      </div>
+
+        <div class="actions">
+            <button class="action-button" (click)="editTask(task.id)">Edit</button>
+            <button class="delete-btn" (click)="deleteTask(task)">Delete</button> 
+        </div>
+    </div>
+  </div>
+  } }
+</section>
