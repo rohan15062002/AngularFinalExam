@@ -50,7 +50,7 @@ export class UsersService {
 
   getUserByIdObservable(id:string){
     const tasksRef = collection(this.firestore, 'users');
-    const q = query(tasksRef, where('id', '==', id));
+    const q = query(tasksRef, where('uid', '==', id));
     return collectionData(q, { idField: 'firebaseId' }) as Observable<User[]>;
   }
 

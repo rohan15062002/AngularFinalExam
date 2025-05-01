@@ -22,7 +22,7 @@ export class ViewTaskComponent {
   taskId!: string;
   loading=false;
   role:string|null="";
-
+  assignedUserName = 'Unknown User';
   constructor(
     private taskService: TasksService,
     private authService: AuthService,
@@ -46,14 +46,14 @@ export class ViewTaskComponent {
         console.log(res,"result")
         this.task = res;
         console.log(this.task,"task")
+        this.userService.getUserByIdObservable(this.task.assignedTo).subscribe(users => {
+          const user = users[0];
+          this.assignedUserName = user ? user.name : 'Unknown User';
+        });
         this.loading=false;
        })
   }
   
-  getAssignedUserName(userId: string): string {
-    const user = this.userService.getUserById(userId);  // you need to write this function in UsersService
-    return user ? user.name : 'Unknown User';
-  }
 
   goHome(){
     return this.router.navigateByUrl(`dashboard/${this.role}`)
