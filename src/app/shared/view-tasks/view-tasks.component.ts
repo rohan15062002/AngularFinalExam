@@ -32,25 +32,22 @@ export class ViewTaskComponent {
   ) {
     this.taskId = this.activatedRoute.snapshot.params['id'];
     console.log(this.taskId)
+  }
 
-       this.loading=true;
+  ngOnInit(){
+    this.loading=true;
        this.role = this.authService.getUserRole();
-       this.taskService.getTaskById(this.taskId).then((task)=>{
+       this.taskService.getTaskByIdObservable(this.taskId).subscribe((task)=>{
         if(!task){
           this.router.navigateByUrl(`/dashboard/${this.role}`);
         }
 
-        const res: Task = task as Task;
+        const res: Task = task[0] as Task;
         console.log(res,"result")
         this.task = res;
         console.log(this.task,"task")
-       },(error)=>{
-        console.log('Error:', error);
-       }).finally(()=>{
         this.loading=false;
        })
-    
-    
   }
   
   getAssignedUserName(userId: string): string {

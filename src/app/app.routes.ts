@@ -21,7 +21,7 @@ export const routes: Routes = [
         path: 'dashboard/admin',
         loadComponent: () => import('./components/admin/admin.component').then(m => m.AdminComponent),
         canActivate: [AuthGuard],
-        data: { role: 'admin' }
+        data: { roles: ['admin'] }
     },
     {
         path: 'admin/add',
@@ -30,7 +30,7 @@ export const routes: Routes = [
             (m) => m.AddTasksComponent
           ),
         canActivate: [AuthGuard],
-        data: { role: 'admin' },
+        data: { roles: ['admin'] },
       },
       {
         path: 'admin/edit/:id',
@@ -39,7 +39,7 @@ export const routes: Routes = [
             (m) => m.EditTasksComponent
           ),
         canActivate: [AuthGuard],
-        data: { role: 'admin' },
+        data: { roles: ['admin'] },
       },
       {
         path: 'admin/manage-users',
@@ -48,25 +48,25 @@ export const routes: Routes = [
             (m) => m.ManageUserRoleComponent
           ),
         canActivate: [AuthGuard],
-        data: { role: 'admin' },
+        data: { roles: ['admin'] },
       },
       {
         path: 'view/:id',
         loadComponent: () => import('./shared/view-tasks/view-tasks.component').then(m => m.ViewTaskComponent),
         canActivate: [AuthGuard],
-        data: { roles: ['reporter','admin'] }
+        data: { roles: ['member','admin'] }
       },
       {
         path: 'edituser/:id',
         loadComponent: () => import('./shared/edit-details/edit-details.component').then(m => m.EditDetailsComponent),
         canActivate: [AuthGuard],
-        data: { roles: ['reporter','admin'] }
+        data: { roles: ['member','admin'] }
       },
       {
         path: 'dashboard/member',
         loadComponent: () => import('./components/member/member.component').then(m => m.MemberComponent),
         canActivate: [AuthGuard],
-        data: { role: 'member' }
+        data: { roles: ['member'] }
       },
       {
         path: 'member/task/:id',
@@ -75,7 +75,7 @@ export const routes: Routes = [
             (m) => m.TaskDetailsComponent
           ),
         canActivate: [AuthGuard],
-        data: { role: 'member' },
+        data: { roles: ['member'] },
       }
 
 ];

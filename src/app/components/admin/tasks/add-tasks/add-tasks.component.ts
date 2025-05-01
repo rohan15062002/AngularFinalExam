@@ -51,6 +51,7 @@ export class AddTasksComponent {
       projectDescription: this.addTaskForm.value.projectDescription!,
       assignedTo: this.addTaskForm.value.assignedTo!,
       status: 'pending',
+      comments:[]
     };
     this.isLoading = true;
     this.taskService

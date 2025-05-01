@@ -42,7 +42,7 @@
         >
           <option value="">Select role</option>
           <option value="admin">Admin</option>
-          <option value="reporter">Reporter</option>
+          <option value="member">Member</option>
         </select>
         <div class="error" *ngIf="editForm.get('role')?.hasError('required') && editForm.get('role')?.touched">
           Role is required.

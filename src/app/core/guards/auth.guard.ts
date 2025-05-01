@@ -31,9 +31,8 @@ export class AuthGuard implements CanActivate {
     console.log('Role:', role);
 
     if (role) {
-      const requiredRole = route.data['role'];
-      console.log(requiredRole,"dhshjs")
-      if (!requiredRole || role === requiredRole) {
+      const requiredRole:string[]= route.data['roles'];
+      if (!requiredRole || requiredRole.includes(role)) {
         return true;
       }
     

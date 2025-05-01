@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FireStoreService } from './firestore.service';
 import { User } from '../../app.model';
+import { collection, query, where } from 'firebase/firestore';
+import { collectionData, Firestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +12,7 @@ export class UsersService {
   private users: User[] = [];
   userLoading = false;
 
-  constructor(private firestoreService: FireStoreService) {
+  constructor(private firestoreService: FireStoreService,private firestore:Firestore) {
     this.userLoading = true;
     this.fetchUsers()
       .then(
@@ -43,6 +46,12 @@ export class UsersService {
 
   getUserById(id: string) {
     return this.users.find((user) => user.uid === id);
+  }
+
+  getUserByIdObservable(id:string){
+    const tasksRef = collection(this.firestore, 'users');
+    const q = query(tasksRef, where('id', '==', id));
+    return collectionData(q, { idField: 'firebaseId' }) as Observable<User[]>;
   }
 
   updateUserRole(id: string, role: 'admin' | 'member') {

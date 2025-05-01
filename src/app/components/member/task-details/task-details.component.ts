@@ -77,6 +77,7 @@ export class TaskDetailsComponent {
       await this.taskService.updateTask({
         ...this.taskDetails,
         status: this.taskStatusForm.value.status,
+        id:this.id
       });
       console.log('Task status updated successfully');
       alert('Task status updated successfully')

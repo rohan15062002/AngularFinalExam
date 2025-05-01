@@ -19,6 +19,7 @@ export class AdminComponent {
   pendingTasks: Task[] = [];
   inProgressTasks: Task[] = [];
   completedTasks: Task[] = [];
+  tasks:Task[]=[];
 
   constructor(
     private router: Router,
@@ -37,28 +38,16 @@ export class AdminComponent {
       }
     );
 
-    this.taskService
-      .fetchTasks()
-      .then(
-        (tasks) => {
-          this.taskService.setTasks(tasks);
-          this.categorizeTasks(); 
-        },
-        (error) => {
-          console.log('Error:', error);
-        }
-      )
-      .finally(() => {
+      this.taskService.getTasksObservable().subscribe((tasks:Task[])=>{
+        this.tasks=tasks;
+        console.log(this.tasks,"heklo")
+        this.categorizeTasks(); 
         this.loading = false;
-      });
-  }
-
-  get tasks() {
-    return this.taskService.getTasks();
+      })
   }
 
   categorizeTasks() {
-    const allTasks = this.taskService.getTasks();
+    const allTasks = this.tasks;
     this.pendingTasks = allTasks.filter(task => task.status.toLowerCase() === 'pending');
     this.inProgressTasks = allTasks.filter(task => task.status.toLowerCase() === 'in-progress');
     this.completedTasks = allTasks.filter(task => task.status.toLowerCase() === 'completed');

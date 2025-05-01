@@ -134,6 +134,9 @@ export class AuthService {
   async updateUser(updatedUserData: CurrentUser) {
     const uid = this.currentUser?.uid;
     console.log(updatedUserData,"updated")
+    if (!uid) {
+      throw new Error('User UID is missing.');
+    }
     const userRef = collection(this.firestore, `users`);
     const q = query(userRef, where('email', '==', this.currentUser?.email));
     const querySnapshot = await getDocs(q);
@@ -144,7 +147,14 @@ export class AuthService {
     const userDoc = querySnapshot.docs[0]; // assuming email is unique
     console.log(userDoc.id)
     const userDocRef = doc(this.firestore, 'users', userDoc.id);
+    const updatedData: CurrentUser = {
+      ...updatedUserData,
+      uid: uid
+    };
     await setDoc(userDocRef, { ...updatedUserData,uid: uid});
+
+    sessionStorage.setItem('user', JSON.stringify(updatedData));
+    this.currentUser = updatedData;
   }
 
   getLoggedInUser(): User | null {

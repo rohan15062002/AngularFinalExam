@@ -24,5 +24,6 @@ export interface User {
     projectDescription: string;
     status: 'pending' | 'in-progress' | 'completed';
     assignedTo: string;
+    comments: Comment[];
   }
   

@@ -5,6 +5,7 @@ import { UsersService } from '../../core/services/user.service';
 import { TasksService } from '../../core/services/task.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { AuthService } from '../../core/services/fireauth.service';
 
 
 @Component({
@@ -20,11 +21,12 @@ export class MemberComponent  {
   pendingTasks: Task[] = [];
   inProgressTasks: Task[] = [];
   completedTasks: Task[] = [];
-
+  tasks:Task[]=[];
   constructor(
     private router: Router,
     private usersService: UsersService,
-    private taskService: TasksService
+    private taskService: TasksService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(){
@@ -38,35 +40,24 @@ export class MemberComponent  {
       }
     );
 
-    this.taskService
-      .fetchTasks()
-      .then(
-        (tasks) => {
-          this.taskService.setTasks(tasks);
-          this.categorizeTasks();
-        },
-        (error) => {
-          console.log('Error:', error);
-        }
-      )
-      .finally(() => {
-        this.loading = false;
-      });
+    this.taskService.getTasksObservable().subscribe((tasks:Task[])=>{
+      this.tasks=tasks;
+      console.log(this.tasks,"heklo")
+      this.categorizeTasks(); 
+      this.loading = false;
+    })
   }
 
-  get tasks() {
-    return this.taskService.getTasks();
-  }
-  
   categorizeTasks() {
-    const allTasks = this.taskService.getTasks();
+    const userId = this.authService.getUserId();
+    const allTasks = this.tasks.filter((t)=>t.assignedTo===userId);
     this.pendingTasks = allTasks.filter(task => task.status.toLowerCase() === 'pending');
     this.inProgressTasks = allTasks.filter(task => task.status.toLowerCase() === 'in-progress');
     this.completedTasks = allTasks.filter(task => task.status.toLowerCase() === 'completed');
   }
   
   getAssignedUserName(userId: string): string {
-    const user = this.usersService.getUserById(userId);  // you need to write this function in UsersService
+    const user = this.usersService.getUserById(userId);  
     return user ? user.name : 'Unknown User';
   }
 

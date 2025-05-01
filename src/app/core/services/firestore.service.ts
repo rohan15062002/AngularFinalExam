@@ -37,7 +37,8 @@ export class FireStoreService {
 
   async addDocument(collectionPath: string, data: any) {
     const collectionRef = collection(this.firestore, collectionPath);
-    const doc = await addDoc(collectionRef, data);
+    const doc = await addDoc(collectionRef, { ...data, id: '' });
+    await setDoc(doc, { ...data, id: doc.id }, {merge:true});
     return doc.id;
   }
 
