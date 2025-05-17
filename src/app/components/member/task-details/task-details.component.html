@@ -43,7 +43,7 @@
             <button
               type="submit"
               style="margin: 5px; font-size: small; padding: 13px;"
-              [class.disabled]="!taskStatusForm.dirty || isUpdating"
+              [class.disabled]="!taskStatusForm.dirty || isUpdating || !commentForm.dirty"
             >
               {{ isUpdating ? "Updating..." : "Update" }}
             </button>

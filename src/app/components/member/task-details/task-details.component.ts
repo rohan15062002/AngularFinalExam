@@ -70,7 +70,11 @@ export class TaskDetailsComponent {
 
 
   async onUpdateStatus() {
-    if (!this.taskDetails) return;
+    if (!this.taskDetails ) return;
+    const comments = this.taskDetails.comments || [];
+    if(!this.commentForm){
+      return
+    }
     
     this.isUpdating = true;
     try {
